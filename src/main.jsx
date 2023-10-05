@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import Recipe from "./pages/Recipe.jsx";
 import RecipeType from "./pages/RecipeType.jsx";
+import LunchRecipeCard from "./components/recipes/LunchRecipeCard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "recipes/:recipeId", element: <Recipe /> },
-      { path: "types/:name", element: <RecipeType /> },
+      { path: "types/lunch", element: <LunchRecipeCard /> },
     ],
   },
 ]);
