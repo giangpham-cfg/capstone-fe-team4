@@ -4,3 +4,265 @@ body {
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+body {
+    font-family: 'Roboto';
+    background-color: #423c3e;
+}
+
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.bar {
+    width: 30px;
+    height: 4px;
+    background-color: #dfd5d5;
+    margin: 6px 0;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px; 
+    width: 300px;
+    height: 100%;
+    background-color: #CBF83E;
+    color: #fff;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center; 
+}
+
+.side-menu ul li img {
+    width: 30px; 
+    height: auto; 
+    margin-right: 15px; 
+}
+
+.side-menu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    flex: 1;
+    padding: 7px;
+}
+
+.side-menu ul li:hover {
+    background-color: #f0f0f0; 
+}
+
+.menu-opened .side-menu {
+    right: 0;
+}
+
+.header {
+    text-align: center;
+    margin: 0;
+}
+
+.header img {
+    max-width: 100%;
+    height: auto;
+    margin-left: -80px;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    max-width: 80%;
+    margin-top: 30px;
+    border-radius: 25px;
+}
+
+.search-bar {
+    display: flex;
+}
+
+.search-container h2 {
+    font-family: 'Roboto';
+    font-size: 22px; 
+    color: #CBF83E; 
+    background-color: transparent;
+    padding: 0px;
+    margin: 15px 0;
+}
+
+.search-container input[type="text"] {
+    color: #333;
+    padding: 10px;
+    width: 80%;  /* Adjusted the width */
+    font-size: 16px;
+    border-top-left-radius: 25px; 
+    border-bottom-left-radius: 25px;
+}
+
+.search-container button {
+    padding: 20px 20px;
+    border: none;
+    background-color: #8e998f;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-top-right-radius: 25px; 
+    border-bottom-right-radius: 25px;
+}
+
+nav {
+    position: fixed;
+    top: 20px;
+    margin: 6px 0;
+    margin-left: 80%;
+}
+
+#loginButton {
+    background: #CBF83E;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease; 
+}
+
+#chef {
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-form {
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.login-form input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #CBF83E;
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #111;
+}
+
+.login-form p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-form a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-form a:hover {
+    color: #111;
+}
+
+.source {
+    text-align: center;
+    color: #ffffff;
+    padding: 10px;
+}
+
+a {
+    color: inherit;
+    outline: none;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.login-button-container {
+    margin-right: 20px;
+    right: 100%;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    max-width: 70%;
+    margin-left: 190px;
+    margin-top: 30px;
+    border-radius: 25px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.search-container h2 {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.search-container p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+  
+ 
