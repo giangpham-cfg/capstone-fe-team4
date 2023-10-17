@@ -1,3 +1,11 @@
+.all-recipes-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  width: 80%;
+}
+
 .each-recipe-container {
   display: flex;
   flex-direction: column;
@@ -12,7 +20,7 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: #fdf0b8;
+  background-color: #92c5fd;
   padding: 20px 0;
   border-radius: 10px 10px 0 0;
 }
@@ -20,10 +28,11 @@
 .recipe-title {
   font-family: "Roboto Mono", monospace;
   font-size: 22px;
+  text-transform: uppercase;
 }
 
 .recipe-content {
-  background-color: #fefce9;
+  background-color: #f2f7ff;
   padding: 20px 40px;
   border-radius: 0 0 10px 10px;
 }
