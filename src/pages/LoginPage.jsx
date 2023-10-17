@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,11 +28,12 @@ const Login = ({ onLogin }) => {
           required
         />
         <input type="submit" value="Sign In" />
-        <p>Don't have an account? <a href="#">Sign-up here</a></p>
+        <p>
+          Don't have an account? <a href="#">Sign-up here</a>
+        </p>
       </form>
     </div>
   );
 };
 
 export default Login;
-

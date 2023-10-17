@@ -1,5 +1,5 @@
 import { recipe } from "../lib";
-import "./recipe.css";
+import "./Recipe.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Recipe() {
