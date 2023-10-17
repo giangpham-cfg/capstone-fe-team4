@@ -4,9 +4,6 @@ import MenuPic from "../../images/navbar chef.png";
 import { FiLogIn } from "react-icons/fi";
 
 export default function Home() {
-<<<<<<< Updated upstream
-  return <div></div>;
-=======
   const mealTime = ["BREAKFAST", "LUNCH", "DINNER", "DESSERT"];
   const navigate = useNavigate();
   return (
@@ -35,5 +32,4 @@ export default function Home() {
       </div>
     </div>
   );
->>>>>>> Stashed changes
 }
