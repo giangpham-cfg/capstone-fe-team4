@@ -46,6 +46,7 @@ export default function App() {
   return (
     <>
       <Navbar />
+      {user.username ? <p>Welcome, {user.username}!</p> : null}
       <Outlet
         context={{
           recipes,

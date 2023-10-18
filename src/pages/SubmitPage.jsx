@@ -27,7 +27,7 @@ export default function SubmitPage() {
     const info = await res.json();
     console.log(info);
     if (info.success) {
-      console.log("Faile to submit the post.");
+      console.log("Failed to submit the post.");
     } else {
       setName("");
     }
