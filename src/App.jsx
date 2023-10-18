@@ -5,8 +5,17 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   const [recipes, setRecipes] = useState([]);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const logout = () => {
+    setToken("");
+    setUser({});
+    setIsLoggedIn(false);
+    localStorage.removeItem("token");
+  };
+  
 
   async function fetchRecipes() {
     const res = await fetch(`${API}/recipes`);
@@ -17,10 +26,6 @@ export default function App() {
   }
 
   async function fetchUser() {
-    const localToken = localStorage.getItem("token");
-    if (localToken) {
-      setToken(localToken);
-    }
     if (!token) {
       return;
     }
@@ -45,8 +50,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
-      {user.username ? <p>Welcome, {user.username}!</p> : null}
+      <Navbar user={user} isLoggedIn={!!token} logout={logout} />
       <Outlet
         context={{
           recipes,
@@ -55,6 +59,7 @@ export default function App() {
           setToken,
           user,
           setUser,
+  
         }}
       />
     </>
