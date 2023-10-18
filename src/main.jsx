@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import RegisterPage from "./pages/RegisterPage.jsx";
+import Register from "./pages/Register.jsx";
 import Recipe from "./pages/Recipe.jsx";
 import RecipeType from "./pages/RecipeType.jsx";
 
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/login", element: <LoginPage /> },
-      { path: "/register", element: <RegisterPage /> },
+      { path: "/register", element: <Register /> },
       { path: "recipes/:recipeId", element: <Recipe /> },
 
       { path: "/submit", element: <SubmitPage /> },
