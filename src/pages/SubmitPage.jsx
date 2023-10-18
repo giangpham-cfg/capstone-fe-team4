@@ -1,15 +1,27 @@
-import React, { useState } from "react";
-import { API } from "../lib";
+import React, { useState, useEffect } from "react";
+import { API } from "../api/index";
 import "./submitCss.css";
+import { useNavigate, useOutletContext } from "react-router-dom";
+
 export default function SubmitPage() {
   const [name, setName] = useState("");
   const [totalTime, setTotalTime] = useState("");
-  const [ingredients, setIngredients] = useState([""]); // Start with one empty ingredient
-  const [instruction, setInstruction] = useState("");
-  const [instructions, setInstructions] = useState([""]); // Start with one empty instruction
+  const [ingredients, setIngredients] = useState([]); // Start with one empty ingredient
+  const [instruction, setInstruction] = useState([]);
 
+  const [mealTime, setMealTime] = useState(""); // Initialize mealTime
+  const [cookTime, setCookTime] = useState(""); // Initialize cookTime
+  const [error, setError] = useState("");
+  const { token, fetchRecipes } = useOutletContext();
+  // const navigate = useNavigate();
+
+  if (!token) {
+    return alert("Please login or register");
+  }
   async function handleSubmit(e) {
+    setError("");
     e.preventDefault();
+    console.log({ name, ingredients, instruction, mealTime, cookTime });
     const res = await fetch(`${API}/recipes/submit`, {
       method: "POST",
       headers: {
@@ -26,11 +38,19 @@ export default function SubmitPage() {
     });
     const info = await res.json();
     console.log(info);
-    if (info.success) {
-      console.log("Faile to submit the post.");
+    setError(info.error);
+    if (!info.success) {
+      return alert("Unsuccessful");
     } else {
-      setName("");
+      // setName("");
+      // setMealTime("");
+      // setCookTime("");
+      // setTotalTime("");
+      // setIngredients([]);
+      // setInstruction([]);
+      fetchRecipes();
     }
+    // navigate("/");
   }
 
   const handleAddIngredient = () => {
@@ -50,18 +70,19 @@ export default function SubmitPage() {
   };
   //Instruction
   const handleAddInstruction = () => {
-    setInstructions([...instructions, ""]);
+    setInstruction([...instruction, ""]);
   };
   const handleInstructionChange = (index, value) => {
-    const newInstruction = [...instructions];
+    const newInstruction = [...instruction];
     newInstruction[index] = value;
-    setInstructions(newInstruction);
+    setInstruction(newInstruction);
   };
   const handleRemoveInstruction = (index) => {
-    const newInstruction = [...instructions];
+    const newInstruction = [...instruction];
     newInstruction.splice(index, 1);
-    setInstructions(newInstruction);
+    setInstruction(newInstruction);
   };
+  console.log({ mealTime });
   return (
     <div className="submit-container">
       <h1>Submit Your Recipe</h1>
@@ -76,28 +97,26 @@ export default function SubmitPage() {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        {/* Other form fields here... */}
+
         <div>
           <p className="paragrap">Meal-Time</p>
           <div className="recipes-type">
-            <div style={{ display: "flex" }}>
-              {/* put name its mean you can select only 1 thing */}
-              <input type="radio" name="recipes" />
-              <p>BREAKFAST</p>
-            </div>
-            <div style={{ display: "flex" }}>
-              <input type="radio" name="recipes" />
-              <p>LUNCH</p>
-            </div>
-            <div style={{ display: "flex" }}>
-              <input type="radio" name="recipes" />
-
-              <p>DINNER</p>
-            </div>{" "}
-            <div style={{ display: "flex" }}>
-              <input type="radio" name="recipes" />
-              <p>DESSERT</p>
-            </div>
+            <label htmlFor="mealTimeSelect">Select Mealtime:</label>
+            <select
+              id="mealTimeSelect"
+              className=""
+              value={mealTime}
+              onChange={(e) => setMealTime(e.target.value)}
+              // onChange={(e) => setMealTime(e.target.value)}
+            >
+              <option disabled value="">
+                Select Mealtime:
+              </option>
+              <option value="BREAKFAST">Breakfast</option>
+              <option value="LUNCH">Lunch</option>
+              <option value="DINNER">Dinner</option>
+              <option value="DESSERT">Dessert</option>
+            </select>
           </div>
         </div>
         <div>
@@ -105,9 +124,11 @@ export default function SubmitPage() {
           <input
             className="instrctionInput-container"
             type="text"
-            name=""
+            name="cookTime"
+            value={cookTime}
             id=""
             placeholder="How long to take to make the food"
+            onChange={(e) => setCookTime(e.target.value)}
           />
         </div>
 
@@ -146,27 +167,25 @@ export default function SubmitPage() {
 
         <div>
           <p className="paragrap">Instructions</p>
-          {instructions.map((instruction, index) => (
-            <div>
-              <div key={index}>
-                <div style={{ display: "flex" }}>
-                  <span className="span-index">{index + 1}.</span>
-                  <input
-                    className="instrctionInput-container"
-                    value={instruction}
-                    type="text"
-                    placeholder="Add a step"
-                    onChange={(e) =>
-                      handleInstructionChange(index, e.target.value)
-                    }
-                  />
-                  <button
-                    className="instrction-button"
-                    onClick={() => handleRemoveInstruction(index)}
-                  >
-                    x
-                  </button>
-                </div>
+          {instruction.map((_instruction, index) => (
+            <div key={index}>
+              <div style={{ display: "flex" }}>
+                <span className="span-index">{index + 1}.</span>
+                <input
+                  className="instrctionInput-container"
+                  value={_instruction}
+                  type="text"
+                  placeholder="Add a step"
+                  onChange={(e) =>
+                    handleInstructionChange(index, e.target.value)
+                  }
+                />
+                <button
+                  className="instrction-button"
+                  onClick={() => handleRemoveInstruction(index)}
+                >
+                  x
+                </button>
               </div>
             </div>
           ))}
@@ -191,3 +210,47 @@ export default function SubmitPage() {
     </div>
   );
 }
+
+// {/* <label htmlFor="breakfast">
+// {/* put name its mean you can select only 1 thing */}
+// <input
+//   id="breakfast"
+//   value={"BREAKFAST"}
+//   type="checkbox"
+//   style={{ marginBottom: "15px" }}
+//   onChange={onMealTimeChange}
+//   checked={mealTime === "BREAKFAST"}
+// />
+// BREAKFAST
+// </label>
+// <label style={{ display: "flex" }}>
+// <input
+//   value={"LUNCH"}
+//   type="radio"
+//   style={{ marginBottom: "15px" }}
+//   onChange={onMealTimeChange}
+//   checked={mealTime === "LUNCH"}
+// />
+// <p style={{ padding: "5px" }}>LUNCH</p>
+// </label>
+// <label style={{ display: "flex" }}>
+// <input
+//   value={"DINNER"}
+//   type="radio"
+//   style={{ marginBottom: "15px" }}
+//   onChange={onMealTimeChange}
+//   checked={mealTime === "DINNER"}
+// />
+
+// <p style={{ padding: "5px" }}>DINNER</p>
+// </label>
+// <label style={{ display: "flex" }}>
+// <input
+//   value={"DESSERT"}
+//   type="radio"
+//   style={{ marginBottom: "15px" }}
+//   onChange={onMealTimeChange}
+//   checked={mealTime === "DESSERT"}
+// />
+// <p style={{ padding: "5px" }}>DESSERT</p>
+// </label> */}

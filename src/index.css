@@ -22,7 +22,7 @@ body {
   background-color: #cbf83f;
   padding: 30px 20px;
   color: black;
-  /* border-top: 1px solid #dae0e6; */
+  border-top: 1px solid #dae0e6;
 }
 
 .type-container {
