@@ -26,7 +26,10 @@ const Login = () => {
 
       const data = await response.json();
       setToken(data.token);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
       localStorage.setItem("token", data.token);
     } catch (error) {
       console.error("Failed to login, try again or please sign up", error);
