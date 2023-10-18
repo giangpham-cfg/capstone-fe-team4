@@ -1,12 +1,45 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import { API } from '../api';
+import './Login.css';
 
-const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const {setToken} = useOutletContext();
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onLogin(username, password);
+
+    try {
+      const response = await fetch(`${API}/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setToken(data.token);
+      
+
+      setToken(token);
+      localStorage.setItem('token', token);
+      
+
+    
+    } catch (error) {
+      console.error('Failed to login, try again or please sign up', error);
+    }
+
+    navigate("/"); 
+    
   };
 
   return (
@@ -29,7 +62,7 @@ const Login = ({ onLogin }) => {
         />
         <input type="submit" value="Sign In" />
         <p>
-          Don't have an account? <a href="#">Sign-up here</a>
+          Don't have an account? <Link to="/register">Sign-up here</Link>
         </p>
       </form>
     </div>
@@ -37,3 +70,4 @@ const Login = ({ onLogin }) => {
 };
 
 export default Login;
+
