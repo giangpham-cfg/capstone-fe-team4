@@ -13,7 +13,7 @@ export default function SubmitPage() {
   const [cookTime, setCookTime] = useState(""); // Initialize cookTime
   const [error, setError] = useState("");
   const { token, fetchRecipes } = useOutletContext();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   if (!token) {
     return alert("Please login or register");
@@ -21,7 +21,7 @@ export default function SubmitPage() {
   async function handleSubmit(e) {
     setError("");
     e.preventDefault();
-    console.log({ name, ingredients, instruction, mealTime, cookTime });
+    // console.log({ name, ingredients, instruction, mealTime, cookTime });
     const res = await fetch(`${API}/recipes/submit`, {
       method: "POST",
       headers: {
@@ -37,20 +37,14 @@ export default function SubmitPage() {
       }),
     });
     const info = await res.json();
-    console.log(info);
+    // console.log("info:", info);
     setError(info.error);
     if (!info.success) {
       return alert("Unsuccessful");
-    } else {
-      // setName("");
-      // setMealTime("");
-      // setCookTime("");
-      // setTotalTime("");
-      // setIngredients([]);
-      // setInstruction([]);
-      fetchRecipes();
     }
-    // navigate("/");
+
+    fetchRecipes();
+    navigate(`/types/${info.recipe.mealTime}`);
   }
 
   const handleAddIngredient = () => {
@@ -82,7 +76,7 @@ export default function SubmitPage() {
     newInstruction.splice(index, 1);
     setInstruction(newInstruction);
   };
-  console.log({ mealTime });
+
   return (
     <div className="submit-container">
       <h1>Submit Your Recipe</h1>
@@ -107,7 +101,6 @@ export default function SubmitPage() {
               className=""
               value={mealTime}
               onChange={(e) => setMealTime(e.target.value)}
-              // onChange={(e) => setMealTime(e.target.value)}
             >
               <option disabled value="">
                 Select Mealtime:
@@ -160,6 +153,7 @@ export default function SubmitPage() {
               height: "30px",
             }}
             onClick={handleAddIngredient}
+            type="button"
           >
             ➕
           </button>
@@ -183,6 +177,7 @@ export default function SubmitPage() {
                 <button
                   className="instrction-button"
                   onClick={() => handleRemoveInstruction(index)}
+                  type="button"
                 >
                   x
                 </button>
@@ -198,12 +193,13 @@ export default function SubmitPage() {
               height: "30px",
             }}
             onClick={handleAddInstruction}
+            type="button"
           >
             ➕
           </button>
         </div>
 
-        <button className="submit-button" type="submit">
+        <button type="submit" className="submit-button">
           Submit
         </button>
       </form>

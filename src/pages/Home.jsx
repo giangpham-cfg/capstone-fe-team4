@@ -37,9 +37,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuPic from "../../images/navbar chef.png";
-import { FiLogIn, FiMenu } from "react-icons/fi";
+import { FiLogIn } from "react-icons/fi";
+import { useOutletContext } from "react-router-dom";
 
 export default function Home() {
+  const { user } = useOutletContext();
   const mealTime = ["BREAKFAST", "LUNCH", "DINNER", "DESSERT"];
   const navigate = useNavigate();
 
@@ -53,11 +55,8 @@ export default function Home() {
 
   return (
     <div className="home-page-container">
-      {/* Step 3: Apply CSS classes based on the isSidebarOpen state */}
-      <div className={`mealtime-list-container ${isSidebarOpen ? "open" : ""}`}>
-        <div className="hamburger-icon" onClick={toggleSidebar}>
-          <FiMenu />
-        </div>
+      <div className="mealtime-list-container">
+        {user.username ? <p>Welcome, {user.username}!</p> : null}
         <img src={MenuPic} alt="" width={70} />
         <div className="type-container">
           {mealTime.map((item, index) => (
@@ -84,6 +83,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-    
   );
 }
