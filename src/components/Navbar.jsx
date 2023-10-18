@@ -18,10 +18,7 @@ export default function Navbar({ user, isLoggedIn, logout }) {
 
       <div className="nav-login" style={{ display: "flex", gap: "30px" }}>
         {isLoggedIn ? (
-          <button
-            onClick={logout}
-            style={{ width: "100px", height: "30px" }}
-          >
+          <button onClick={logout} style={{ width: "100px", height: "30px" }}>
             Logout
           </button>
         ) : (

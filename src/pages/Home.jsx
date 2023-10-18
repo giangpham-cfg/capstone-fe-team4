@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuPic from "../../images/navbar chef.png";
 import { FiLogIn } from "react-icons/fi";
@@ -38,7 +38,11 @@ export default function Home() {
               className="type"
               key={index}
               style={{ cursor: "pointer" }}
-              onClick={() => navigate(`/types/${item}`)}
+              onClick={() => {
+                navigate(`/types/${item}`);
+                // Close the sidebar when a menu item is clicked
+                setIsSidebarOpen(false);
+              }}
             >
               {item}
             </div>
@@ -60,4 +64,3 @@ export default function Home() {
     </div>
   );
 }
-

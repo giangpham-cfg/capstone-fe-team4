@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useNavigate, useOutletContext } from 'react-router-dom';
-import { API } from '../api';
-import './Login.css';
-
+import React, { useState } from "react";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { API } from "../api";
+import "./Login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const {setToken} = useOutletContext();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { setToken } = useOutletContext();
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await fetch(`${API}/users/login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
       });
@@ -27,19 +26,12 @@ const Login = () => {
 
       const data = await response.json();
       setToken(data.token);
-      
-
-      setToken(token);
-      localStorage.setItem('token', token);
-      
-
-    
+      localStorage.setItem("token", data.token);
     } catch (error) {
-      console.error('Failed to login, try again or please sign up', error);
+      console.error("Failed to login, try again or please sign up", error);
     }
 
-    navigate("/"); 
-    
+    navigate("/");
   };
 
   return (
@@ -70,4 +62,3 @@ const Login = () => {
 };
 
 export default Login;
-

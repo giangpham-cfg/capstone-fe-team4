@@ -5,16 +5,14 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: #dae0e6;
   font-size: 12px;
-  background-color: #423c3e;
 }
 
 .home-page-container {
   background-color: white;
-  background-image: url('https://th.bing.com/th/id/R.8193dccce1dabcf301b1a746b99d6ca0?rik=MQlcz3feTcAl%2bw&pid=ImgRaw&r=0');
+  background-image: url("https://th.bing.com/th/id/R.8193dccce1dabcf301b1a746b99d6ca0?rik=MQlcz3feTcAl%2bw&pid=ImgRaw&r=0");
   background-size: 100% 50%;
   background-position: center top;
   background-repeat: no-repeat;
-  
 }
 
 .mealtime-list-container {
@@ -27,7 +25,7 @@ body {
   background-color: #cbf83f;
   padding: 30px 20px;
   color: black;
-
+  border-top: 1px solid #dae0e6;
 }
 
 .type-container {
