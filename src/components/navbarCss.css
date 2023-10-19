@@ -9,12 +9,14 @@
 .icon-container h1 {
   font-size: 35px;
   height: 80px;
-  color: rgb(86, 132, 16);
+  color: black;
   background-color: white;
   padding-top: 35px;
+  text-shadow: 2px 2px 2px #cbf83f; /* Add a shadow to the text */
 }
+
 .nav-login button {
-  background-color: rgb(86, 132, 16);
+  background-color: #cbf83f;
   border-radius: 5px;
   margin-top: 35px;
 }
